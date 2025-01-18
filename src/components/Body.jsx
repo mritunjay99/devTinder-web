@@ -32,7 +32,7 @@ const Body = () => {
     fetchUser();
   }, []);
   return (
-    <div>
+    <div className="flex flex-col h-screen justify-between">
       <Navbar />
       <Outlet />
       <Footer />
