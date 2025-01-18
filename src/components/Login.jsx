@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import BASE_URL from "../utils/constants";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("mritunjay@gmail.com");
+  const [password, setPassword] = useState("Mritunjay@123");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -14,7 +15,7 @@ const Login = () => {
     try {
       //if you are calling the login api , and if you are getting auth token from the api as response then you need to set "withCredential" to true and even in backend you need to set "credential" to true
       const response = await axios.post(
-        "http://localhost:3000/login",
+        BASE_URL+"/login",
         {
           emailId: email,
           password: password,
