@@ -16,7 +16,7 @@ const Feed = () => {
       const response = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
-      dispatch(addFeed(response.data));
+      dispatch(addFeed(response.data.data));
     } catch (err) {
       console.error(err.message);
     }
@@ -26,10 +26,18 @@ const Feed = () => {
     getFeed();
   }, []); //since the dependency array is empty, it will call getFeed once after this component loads
 
+  if (!feedData) return;
+  if (feedData.length == 0) {
+    return (
+      <h1 className="flex justify-center font-extrabold">
+        No new users found!
+      </h1>
+    );
+  }
   return (
     feedData && (
       <div className="flex justify-center my-5">
-        <UserCard user={feedData.data[0]} />
+        <UserCard user={feedData[0]} />
       </div>
     )
   );

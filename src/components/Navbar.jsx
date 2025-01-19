@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import BASE_URL from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
-import { removeFeed } from "../utils/feedSlice";
+// import { removeFeed } from "../utils/feedSlice";
 import { removeConnection } from "../utils/connectionSlice";
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true }); //you need to pass the empty body otherwise token will not be set to null
       dispatch(removeUser());
-      dispatch(removeFeed());
+      // dispatch(removeFeed());
       dispatch(removeConnection());
       navigate("/login");
     } catch (err) {
