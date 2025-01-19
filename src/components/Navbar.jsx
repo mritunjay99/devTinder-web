@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import BASE_URL from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { removeFeed } from "../utils/feedSlice";
+import { removeConnection } from "../utils/connectionSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -17,7 +18,8 @@ const Navbar = () => {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true }); //you need to pass the empty body otherwise token will not be set to null
       dispatch(removeUser());
       dispatch(removeFeed());
-      return navigate("/login");
+      dispatch(removeConnection());
+      navigate("/login");
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +56,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">Connections</Link>
+              </li>
+              <li>
+                <Link to="/requests">Requests</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
