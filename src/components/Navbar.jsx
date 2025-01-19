@@ -6,6 +6,9 @@ import BASE_URL from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 // import { removeFeed } from "../utils/feedSlice";
 import { removeConnection } from "../utils/connectionSlice";
+import { removeRequest } from "../utils/requestSlice";
+import { remmoveFeed } from "../utils/feedSlice";
+import { remove } from "../utils/requestSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,6 +22,10 @@ const Navbar = () => {
       dispatch(removeUser());
       // dispatch(removeFeed());
       dispatch(removeConnection());
+      dispatch(removeUser());
+      dispatch(removeRequest());
+      dispatch(remmoveFeed());
+      dispatch(remove());
       navigate("/login");
     } catch (err) {
       console.error(err);
