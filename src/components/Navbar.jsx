@@ -6,7 +6,6 @@ import BASE_URL from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 // import { removeFeed } from "../utils/feedSlice";
 import { removeConnection } from "../utils/connectionSlice";
-import { removeRequest } from "../utils/requestSlice";
 import { remmoveFeed } from "../utils/feedSlice";
 import { remove } from "../utils/requestSlice";
 
@@ -23,7 +22,6 @@ const Navbar = () => {
       // dispatch(removeFeed());
       dispatch(removeConnection());
       dispatch(removeUser());
-      dispatch(removeRequest());
       dispatch(remmoveFeed());
       dispatch(remove());
       navigate("/login");
@@ -35,9 +33,13 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          🧑‍💻DevTinder
-        </Link>
+        {user ? (
+          <Link to="/" className="btn btn-ghost text-xl">
+            🧑‍💻DevTinder
+          </Link>
+        ) : (
+          <h1>🧑‍💻DevTinder</h1>
+        )}
       </div>
       {user && (
         <div className="flex-none gap-2">
