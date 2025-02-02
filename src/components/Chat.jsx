@@ -11,13 +11,18 @@ export const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((store) => store.user);
+  const connections = useSelector((store) => store.connection);
   const userId = user?._id;
+  const targetUser = connections.find(
+    (connection) => connection._id == targetUserId
+  );
+  // console.log(targetUser);
 
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
       withCredentials: true,
     });
-    console.log(chat.data.messages);
+    // console.log(chat.data.messages);
     const chatMessages = chat?.data?.messages.map((msg) => {
       return {
         firstName: msg.senderId.firstName,
@@ -44,7 +49,7 @@ export const Chat = () => {
       targetUserId,
     });
     socket.on("messageReceived", ({ firstName, lastName, newMessage }) => {
-      console.log("Message received");
+      // console.log("Message received");
       // console.log(firstName + " " + newMessage);
       setMessages((messages) => [
         ...messages,
@@ -85,7 +90,11 @@ export const Chat = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS chat bubble component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={
+                      user.firstName == msg.firstName
+                        ? user.photoURL
+                        : targetUser.photoURL
+                    }
                   />
                 </div>
               </div>
